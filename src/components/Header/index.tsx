@@ -12,9 +12,7 @@ export const Header = () => {
                 <CategoryComponent>
                     <option value={0} hidden>Categoria</option>
                     {
-                        categorys.map((category, i) => (
-                            <option key={i} value={category}> {category} </option>
-                        ))
+                        categorys.map((category, i) => <option key={i} value={category}> {category} </option>)
                     }
                 </CategoryComponent>
                 <ButtonComponent
