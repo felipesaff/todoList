@@ -14,7 +14,7 @@ import { ButtonComponent } from "../Button/button.styled"
 import { TodoComponent } from "./todo.styled"
 
 type Props = {
-    id: number;
+    id?: number;
     title: string;
     category?: string;
 }
