@@ -11,16 +11,16 @@ export const HeaderComponent = styled.div`
         display: flex;
     }
 `
-export const InputTitle = styled.input`
-    border: 1px solid #fefefe;
+export const InputTitle = styled.input<{error: boolean}>`
+    border: ${props => props.error ? ' 2px solid #e60b0b': '1px solid #fefefe'};
     border-radius: 5px;
     padding: 5px 10px;
     outline: none;
     color: #5f5f5f;
 `
 
-export const CategoryComponent = styled.select`
-    border: 1px solid #fefefe;
+export const CategoryComponent = styled.select<{error: boolean}>`
+    border: ${props => props.error ? ' 2px solid #e60b0b': '1px solid #fefefe'};
     border-radius: 5px;
     padding: 5px 10px;
     outline: none;

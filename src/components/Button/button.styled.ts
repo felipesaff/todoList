@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 type Props = {
     ml?: boolean;
-    hover?: 'danger' | 'success';
+    hover?: 'danger' | 'success' | 'warning';
 }
 export const ButtonComponent = styled.button<Props>`
     display: flex;
@@ -17,6 +17,8 @@ export const ButtonComponent = styled.button<Props>`
                     return '#e60b0b';
                 case 'success':
                     return '#32a840';
+                case 'warning':
+                    return '#f59e0b'
                 default:
                     return '#d3d3d3'
             }

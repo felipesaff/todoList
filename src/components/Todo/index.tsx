@@ -1,5 +1,6 @@
 import React from 'react'
 import {BsFillCheckCircleFill, BsTrashFill} from 'react-icons/bs'
+import { AiOutlineUndo } from 'react-icons/ai'
 import {
     FcGraduationCap,
     FcSportsMode,
@@ -9,17 +10,15 @@ import {
     FcSupport,
     FcShop
 } from 'react-icons/fc'
+import { useDispatch } from 'react-redux';
 
+import { removeTodo, markAsDone, markAsUndo } from '../../redux/reducer/todoReducer';
 import { ButtonComponent } from "../Button/button.styled"
 import { TodoComponent } from "./todo.styled"
+import { TodoType } from '../../redux/reducer/types/todoType';
 
-type Props = {
-    id?: number;
-    title: string;
-    category?: string;
-}
 
-export const Todo = ({title, category, id}: Props) => {
+export const Todo = ({id, title, category, isDone}: TodoType) => {
     let categoryIcon: React.ReactNode;
     switch (category) {
         case 'Estudo':
@@ -44,24 +43,39 @@ export const Todo = ({title, category, id}: Props) => {
             categoryIcon = <FcSupport />;
     }
 
+    const dispatch = useDispatch();
+
     return (
-        <TodoComponent>
+        <TodoComponent isDone={isDone} >
             <span>
                 {categoryIcon}
                 <p> {title} </p>
             </span>
             <span>
                 <ButtonComponent
+                    onClick={() => dispatch( removeTodo({id}) )}
                     hover='danger'
                     title='Remover item'
                     children={<BsTrashFill />}
                 />
-                <ButtonComponent
-                    hover='success'
-                    title='Marcar como feito'
-                    ml={true}
-                    children={<BsFillCheckCircleFill/>}
-                />
+                {
+                    isDone ?
+                    <ButtonComponent
+                        onClick={() => dispatch( markAsUndo({id}) )}
+                        hover="warning"
+                        title='Marcar como não feito'
+                        ml={true}
+                        children={<AiOutlineUndo />}
+                    /> :
+                    <ButtonComponent
+                        onClick={() => dispatch( markAsDone({id}) )}
+                        hover='success'
+                        title='Marcar como feito'
+                        ml={true}
+                        children={<BsFillCheckCircleFill/>}
+                    />
+
+                }
             </span>
 
         </TodoComponent>
