@@ -4,7 +4,7 @@ import { BsFillPlusCircleFill } from 'react-icons/bs'
 import uuid from "react-uuid"
 
 import { HeaderComponent, InputTitle, CategoryComponent } from "./header.styled"
-import { categorys } from "../../data/datas"
+import { categories } from "../../data/data"
 import { ButtonComponent } from "../Button/button.styled"
 import { addTodo } from "../../redux/reducer/todoReducer"
 
@@ -22,8 +22,8 @@ export const Header = () => {
         
     }
     function add() {
-        if(!title) return setErrors(state => ({...state, titleError: true}));
-        if(!category) return setErrors(state => ({...state, categoryError: true}));
+        if(!title) return setErrors({categoryError: false, titleError: true});
+        if(!category) return setErrors({titleError: false, categoryError: true});
 
         dispatch( addTodo({
             id: uuid(),
@@ -51,7 +51,7 @@ export const Header = () => {
                 >
                     <option value={0} hidden>Categoria</option>
                     {
-                        categorys.map((category, i) => <option key={i} value={category}> {category} </option>)
+                        categories.map((category, i) => <option key={i} value={category}> {category} </option>)
                     }
                 </CategoryComponent>
                 <ButtonComponent
