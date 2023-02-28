@@ -4,9 +4,8 @@ export const TodoComponent = styled.div<{isDone: boolean}>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 30rem;
     background-color: #fefefe;
-    padding: 5px 10px;
+    padding: 5px 0px;
     border-radius: 10px;
 
     &:hover {
