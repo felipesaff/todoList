@@ -7,11 +7,14 @@ import { HeaderComponent, InputTitle, CategoryComponent } from "./header.styled"
 import { categories } from "../../data/data"
 import { ButtonComponent } from "../Button/button.styled"
 import { addTodo } from "../../redux/reducer/todoReducer"
+import { useStateSelector } from "../../redux/hooks/useSelectors"
 
 export const Header = () => {
     const [category, setCategory] = useState<string>('');
     const [title, setTitle] = useState<string>('')
     const [errors, setErrors] = useState({titleError: false, categoryError: false})
+
+    const theme = useStateSelector(state => state.theme.theme)
     const dispatch = useDispatch();
 
     function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -38,7 +41,7 @@ export const Header = () => {
         })
     }
     return (
-        <HeaderComponent>
+        <HeaderComponent theme={theme}>
             <InputTitle
                 error={errors.titleError}
                 onChange={e => handleTitleChange(e)}
@@ -57,8 +60,9 @@ export const Header = () => {
                 <ButtonComponent
                     onClick={add}
                     ml={true}
+                    theme={theme}
                     title="Adicionar Tarefa"
-                    children={<BsFillPlusCircleFill />}
+                    children={<BsFillPlusCircleFill color={theme === 'light' ? '#000' : '#fff'} />}
                 />
             </span>
         </HeaderComponent>

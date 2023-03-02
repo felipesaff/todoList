@@ -1,14 +1,15 @@
-import { useTodoSelector } from "../../redux/hooks/useTodoSelector";
+import { useStateSelector } from "../../redux/hooks/useSelectors";
 
 
 import { Todo } from "../Todo";
 import { TodoListComponent } from "./todoList.styled"
 
 export const TodoList = () => {
-    const todos = useTodoSelector(state => state.todo.todos)
+    const todos = useStateSelector(state => state.todo.todos)
+    const theme = useStateSelector(state => state.theme.theme)
 
     return (
-        <TodoListComponent>
+        <TodoListComponent theme={theme}>
             {
                 todos.length > 0 ?
                 todos.map((todo, i) => (

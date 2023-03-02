@@ -16,6 +16,7 @@ import { removeTodo, markAsDone, markAsUndo } from '../../redux/reducer/todoRedu
 import { ButtonComponent } from "../Button/button.styled"
 import { TodoComponent } from "./todo.styled"
 import { TodoType } from '../../redux/reducer/types/todoType';
+import { useStateSelector } from '../../redux/hooks/useSelectors';
 
 
 export const Todo = ({id, title, category, isDone}: TodoType) => {
@@ -43,10 +44,11 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
             categoryIcon = <FcSupport />;
     }
 
+    const theme = useStateSelector(state => state.theme.theme)
     const dispatch = useDispatch();
 
     return (
-        <TodoComponent isDone={isDone} >
+        <TodoComponent isDone={isDone} theme={theme} >
             <span>
                 {categoryIcon}
                 <p> {title} </p>
@@ -56,7 +58,8 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
                     onClick={() => dispatch( removeTodo({id}) )}
                     hover='danger'
                     title='Remover item'
-                    children={<BsTrashFill />}
+                    theme={theme}
+                    children={<BsTrashFill color={theme === 'light' ? '#000' : '#fff'} />}
                 />
                 {
                     isDone ?
@@ -64,6 +67,7 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
                         onClick={() => dispatch( markAsUndo({id}) )}
                         hover="warning"
                         title='Marcar como não feito'
+                        theme={theme}
                         ml={true}
                         children={<AiOutlineUndo />}
                     /> :
@@ -71,8 +75,9 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
                         onClick={() => dispatch( markAsDone({id}) )}
                         hover='success'
                         title='Marcar como feito'
+                        theme={theme}
                         ml={true}
-                        children={<BsFillCheckCircleFill/>}
+                        children={<BsFillCheckCircleFill color={theme === 'light' ? '#000' : '#fff'} />}
                     />
 
                 }

@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-export const HeaderComponent = styled.div`
+export const HeaderComponent = styled.div<{theme: string}>`
     display: flex;
     justify-content: space-between;
-    background-color: #6991ff;
+    background-color: ${props =>
+        props.theme === 'light' ?
+        '#6991ff' :
+        '#2f4ea3'
+    };
     padding: 15px 10px;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -20,7 +24,7 @@ export const HeaderComponent = styled.div`
     }
 `
 export const InputTitle = styled.input<{error: boolean}>`
-    border: ${props => props.error ? ' 1px solid #e60b0b': '1px solid #fefefe'};
+    border: 1px solid ${props => props.error ? '#e60b0b': '#fefefe'};
     border-radius: 5px;
     padding: 5px 10px;
     outline: none;
