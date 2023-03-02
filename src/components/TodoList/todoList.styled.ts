@@ -11,7 +11,7 @@ export const TodoListComponent = styled.div<{theme: 'light' | 'dark'}>`
     flex-direction: column;
     width: 100%;
     max-height: 65vh;
-    overflow-x: scroll;
+    overflow-y: auto;
     padding: 10px;
     h1 {
         color: ${props =>

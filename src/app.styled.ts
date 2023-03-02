@@ -6,7 +6,7 @@ export const AppComponent = styled.div<{theme: 'light' | 'dark'}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding:  0 1rem;
   background-color: ${props => 
         props.theme === 'light' ?
         '#fefefe' :
