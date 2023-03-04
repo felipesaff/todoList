@@ -32,7 +32,8 @@ export const Header = () => {
             id: uuid(),
             category,
             title,
-            isDone: false
+            isDone: false,
+            isEditModeOn: false
         }))
         
         return setErrors({

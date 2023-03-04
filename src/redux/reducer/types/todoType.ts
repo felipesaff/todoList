@@ -3,6 +3,7 @@ export type TodoType = {
     title: string;
     category: string;
     isDone: boolean;
+    isEditModeOn: boolean
 }
 
 export type TodoActionType = {
@@ -10,6 +11,7 @@ export type TodoActionType = {
     title?: string;
     category?: string;
     isDone?: boolean;
+    isEditModeOn?: boolean;
 }
 
 export type InitialStateType = {

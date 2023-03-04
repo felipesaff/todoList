@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TodoComponent = styled.div<{isDone?: boolean, theme: 'light' | 'dark'}>`
+export const EditComponent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,18 +18,6 @@ export const TodoComponent = styled.div<{isDone?: boolean, theme: 'light' | 'dar
                 '#f7f7f7' :
                 '#5a5a5a'
             };
-        }
-        p {
-            font-weight: 400;
-            margin-left: 10px;
-            color: ${props =>
-                props.isDone ?
-                '#32a840' :
-                props.theme === 'light' ?
-                '#555' :
-                '#eaeaea'
-            };
-            text-decoration: ${props => props.isDone ? 'line-through': 'none'};
         }
         span {
             display: flex;

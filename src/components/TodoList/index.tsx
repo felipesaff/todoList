@@ -19,6 +19,7 @@ export const TodoList = () => {
                         key={i}
                         title={todo.title}
                         category={todo.category}
+                        isEditModeOn={todo.isEditModeOn}
                     />
                 ))
                 :

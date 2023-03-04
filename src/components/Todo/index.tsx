@@ -1,5 +1,9 @@
-import React from 'react'
-import {BsFillCheckCircleFill, BsTrashFill} from 'react-icons/bs'
+import React, { useState } from 'react'
+import {
+    BsFillCheckCircleFill,
+    BsTrashFill,
+    BsFillPencilFill
+} from 'react-icons/bs'
 import { AiOutlineUndo } from 'react-icons/ai'
 import {
     FcGraduationCap,
@@ -12,14 +16,15 @@ import {
 } from 'react-icons/fc'
 import { useDispatch } from 'react-redux';
 
-import { removeTodo, markAsDone, markAsUndo } from '../../redux/reducer/todoReducer';
+import { removeTodo, markAsDone, markAsUndo, turnEditModeOn } from '../../redux/reducer/todoReducer';
 import { ButtonComponent } from "../Button/button.styled"
 import { TodoComponent } from "./todo.styled"
 import { TodoType } from '../../redux/reducer/types/todoType';
 import { useStateSelector } from '../../redux/hooks/useSelectors';
+import { EditTodo } from '../EditTodo';
 
 
-export const Todo = ({id, title, category, isDone}: TodoType) => {
+export const Todo = ({id, title, category, isDone, isEditModeOn}: TodoType) => {
     let categoryIcon: React.ReactNode;
     switch (category) {
         case 'Estudo':
@@ -47,7 +52,18 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
     const theme = useStateSelector(state => state.theme.theme)
     const dispatch = useDispatch();
 
+    function turnEditOn() {
+        dispatch( turnEditModeOn({id}) )
+    }
+
     return (
+        isEditModeOn ?
+        <EditTodo
+            TodoTitle={title}
+            TodoId={id}
+            Todocategory={category}
+        />
+        :
         <TodoComponent isDone={isDone} theme={theme} >
             <span>
                 {categoryIcon}
@@ -61,6 +77,13 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
                     theme={theme}
                     children={<BsTrashFill color={theme === 'light' ? '#000' : '#fff'} />}
                 />
+                <ButtonComponent
+                    children={<BsFillPencilFill color={theme === 'light' ? '#000' : '#fff'} />}
+                    ml={true}
+                    theme={theme}
+                    onClick={turnEditOn}
+                    title="Editar tarefa"
+                />
                 {
                     isDone ?
                     <ButtonComponent
@@ -69,7 +92,7 @@ export const Todo = ({id, title, category, isDone}: TodoType) => {
                         title='Marcar como não feito'
                         theme={theme}
                         ml={true}
-                        children={<AiOutlineUndo />}
+                        children={<AiOutlineUndo color={theme === 'light' ? '#000' : '#fff'} />}
                     /> :
                     <ButtonComponent
                         onClick={() => dispatch( markAsDone({id}) )}
